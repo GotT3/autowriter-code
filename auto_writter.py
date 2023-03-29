@@ -57,7 +57,7 @@ def create_video():
     config_video = get_config()["video"]
     print('Creating the video ...')
     FOURCC = cv2.VideoWriter_fourcc(*'XVID')
-    OUT = cv2.VideoWriter(config_video['name'], FOURCC, config_video['fps'], (config_video['width'], config_video['height']))
+    OUT = cv2.VideoWriter(config_video['output'], FOURCC, config_video['fps'], (config_video['width'], config_video['height']))
 
 def close_video():
     global FOURCC, OUT
