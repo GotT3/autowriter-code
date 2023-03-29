@@ -17,7 +17,7 @@ This code aims to write code like an AI.
 
 ### Usage
 
-> Une fois la commande lancée tu as 3 secondes pour te rendre là ou le code doit être écrit
+> Once the command is launched, you have 3 seconds to get to where the code should be written.
 
 Using defaults : 
 
