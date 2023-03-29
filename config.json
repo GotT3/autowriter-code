@@ -1,0 +1,11 @@
+{
+    "video": {
+        "output": "./video.avi",
+        "fps": 30,
+        "width": 540,
+        "height": 960,
+        "top": 0,
+        "left": 0
+    }, 
+    "code": "./code.txt"
+}

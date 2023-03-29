@@ -3,11 +3,15 @@ import numpy as np
 import pyautogui
 import keyboard
 import time
-from constant import *
+import json
 
 # Video object
 FOURCC = None
 OUT = None
+
+def get_config():
+    config = open('config.json', 'r')
+    return json.load(config)
 
 def wait_start():
     for i in range(3):
@@ -25,7 +29,8 @@ def delete_current_file():
 
 def shot():
     global OUT
-    img = pyautogui.screenshot(region=[TOP, LEFT, WIDTH, HEIGHT])
+    config_video = get_config()["video"]
+    img = pyautogui.screenshot(region=[config_video["top"], config_video["left"], config_video["width"], config_video["height"]])
     # Convert the image to a numpy array
     frame = np.array(img)
     # Convert the image from RGB to BGR for OpenCV
@@ -49,9 +54,10 @@ def write_code(code: str, record: bool = False):
 
 def create_video():
     global FOURCC, OUT
+    config_video = get_config()["video"]
     print('Creating the video ...')
     FOURCC = cv2.VideoWriter_fourcc(*'XVID')
-    OUT = cv2.VideoWriter(VIDEO_NAME, FOURCC, FPS, SCREEN_SIZE)
+    OUT = cv2.VideoWriter(config_video['name'], FOURCC, config_video['fps'], (config_video['width'], config_video['height']))
 
 def close_video():
     global FOURCC, OUT
@@ -61,7 +67,8 @@ def close_video():
 
 def auto_writter(record: bool = False):
     # Get the code from the file
-    with open(FILEPATH, 'r') as file:
+    code_path = get_config()["code"]
+    with open(code_path, 'r') as file:
         print('Reading the file ...')
         code = file.read()
     if record:
